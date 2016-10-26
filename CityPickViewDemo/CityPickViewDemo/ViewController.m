@@ -24,7 +24,7 @@
     [self.view addSubview:textField];
     
     
-    CityPickView *cityPickView = [[CityPickView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 216)];
+    CityPickView *cityPickView = [[CityPickView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 256)];
     cityPickView.address = @"浙江省-杭州市-余杭区";  //设置默认城市，弹出之后显示的是这个
     cityPickView.backgroundColor = [UIColor whiteColor];//设置背景颜色
     cityPickView.toolshidden = NO; //默认是显示的，如不需要，toolsHidden设置为yes
