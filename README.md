@@ -7,7 +7,6 @@
 
 把CityPickView拖入工程中。
 
-在头文件中\
 
 ```
 	#import "CityPickView.h"
@@ -20,7 +19,7 @@
     };
     
     cityPickView.doneBlock = ^(NSString *proVince,NSString *city,NSString *area){
-		//点击取消按钮回调
+		//点击确定按钮回调
     };
   
     cityPickView.cancelblock = ^(){

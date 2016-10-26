@@ -32,7 +32,7 @@
     cityPickView.confirmblock = ^(NSString *proVince,NSString *city,NSString *area){
         textField.text = [NSString stringWithFormat:@"%@-%@-%@",proVince,city,area];
     };
-    //点击取消按钮回调
+    //点击确定按钮回调
     cityPickView.doneBlock = ^(NSString *proVince,NSString *city,NSString *area){
         textField.text = [NSString stringWithFormat:@"%@-%@-%@",proVince,city,area];
         [self.view endEditing:YES];//使键盘消失
