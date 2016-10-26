@@ -17,6 +17,8 @@
     NSArray *_provinceNameArray;    //所有省市的名字数组
     NSArray *_cityNameArray;        //城市数组
     NSArray *_townNameArray;        //城镇array
+    
+    UIView *_toolsView; //上方的确定取消工具栏
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -42,45 +44,52 @@
         _city = _cityNameArray[0];
         _area = _townNameArray[0];
         
-        _cityPickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0,self.frame.size.width,216)];
+        _cityPickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40,self.frame.size.width,self.frame.size.height-40)];
         _cityPickView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _cityPickView.layer.borderWidth = 0.5;
+        _cityPickView.layer.borderWidth = 0.0;
         _cityPickView.delegate = self;
         _cityPickView.dataSource = self;
         [self addSubview:_cityPickView];
         
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
-        view.layer.borderWidth = 0.5;
-        view.hidden = YES;
-        view.layer.borderColor = [UIColor grayColor].CGColor;
-        [self addSubview:view];
+        _toolsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
+        _toolsView.layer.borderWidth = 0.5;
+        _toolsView.layer.borderColor = [UIColor grayColor].CGColor;
+        [self addSubview:_toolsView];
         
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-77, 0, 77, 30)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-77, 0, 77, 40)];
         //button.backgroundColor = [UIColor lightGrayColor];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitle:@"确定" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(selectIt) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        [_toolsView addSubview:button];
         
-        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 77, 30)];
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 77, 40)];
         //button.backgroundColor = [UIColor lightGrayColor];
         [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button2 setTitle:@"取消" forState:UIControlStateNormal];
         [button2 addTarget:self action:@selector(cancelIt) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button2];
+        [_toolsView addSubview:button2];
 
     }
     return self;
 }
 
 - (void)selectIt{
-    self.confirmblock(_province,_city,_area);
-    
+   // self.confirmblock(_province,_city,_area);
+    self.doneBlock(_province,_city,_area);
 }
 - (void)cancelIt{
     self.cancelblock();
 }
+
+- (void)setToolshidden:(BOOL)toolshidden{
+    _toolshidden = toolshidden;
+    if (_toolshidden) {
+        _toolsView.hidden = YES;
+    }
+}
+
 #pragma mark pickView-delegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
